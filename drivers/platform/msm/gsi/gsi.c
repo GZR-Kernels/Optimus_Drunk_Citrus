@@ -2710,7 +2710,6 @@ int gsi_write_channel_scratch(unsigned long chan_hdl,
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_write_channel_scratch);
 
 int gsi_read_channel_scratch(unsigned long chan_hdl,
 		union __packed gsi_channel_scratch *val)
@@ -2743,7 +2742,6 @@ int gsi_read_channel_scratch(unsigned long chan_hdl,
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_read_channel_scratch);
 
 int gsi_update_mhi_channel_scratch(unsigned long chan_hdl,
 		struct __packed gsi_mhi_channel_scratch mscr)
@@ -2775,7 +2773,6 @@ int gsi_update_mhi_channel_scratch(unsigned long chan_hdl,
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_update_mhi_channel_scratch);
 
 int gsi_query_channel_db_addr(unsigned long chan_hdl,
 		uint32_t *db_addr_wp_lsb, uint32_t *db_addr_wp_msb)
@@ -2809,7 +2806,6 @@ int gsi_query_channel_db_addr(unsigned long chan_hdl,
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_query_channel_db_addr);
 
 int gsi_pending_irq_type(void)
 {
@@ -2895,7 +2891,6 @@ int gsi_start_channel(unsigned long chan_hdl)
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_start_channel);
 
 int gsi_stop_channel(unsigned long chan_hdl)
 {
@@ -2973,7 +2968,6 @@ free_lock:
 	mutex_unlock(&gsi_ctx->mlock);
 	return res;
 }
-EXPORT_SYMBOL(gsi_stop_channel);
 
 int gsi_stop_db_channel(unsigned long chan_hdl)
 {
@@ -3042,7 +3036,6 @@ free_lock:
 	mutex_unlock(&gsi_ctx->mlock);
 	return res;
 }
-EXPORT_SYMBOL(gsi_stop_db_channel);
 
 int gsi_reset_channel(unsigned long chan_hdl)
 {
@@ -3139,7 +3132,6 @@ revrfy_chnlstate:
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_reset_channel);
 
 int gsi_dealloc_channel(unsigned long chan_hdl)
 {
@@ -3211,7 +3203,6 @@ int gsi_dealloc_channel(unsigned long chan_hdl)
 	}
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_dealloc_channel);
 
 void gsi_update_ch_dp_stats(struct gsi_chan_ctx *ctx, uint16_t used)
 {
@@ -3335,7 +3326,6 @@ int gsi_query_channel_info(unsigned long chan_hdl,
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_query_channel_info);
 
 int gsi_is_channel_empty(unsigned long chan_hdl, bool *is_empty)
 {
@@ -3416,7 +3406,6 @@ int gsi_is_channel_empty(unsigned long chan_hdl, bool *is_empty)
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_is_channel_empty);
 
 int __gsi_get_gci_cookie(struct gsi_chan_ctx *ctx, uint16_t idx)
 {
@@ -3628,7 +3617,6 @@ ring_doorbell:
 
 	return GSI_STATUS_SUCCESS;
 }
-EXPORT_SYMBOL(gsi_queue_xfer);
 
 int gsi_start_xfer(unsigned long chan_hdl)
 {
