@@ -1481,10 +1481,16 @@ struct task_struct {
 	/* task is frozen/stopped (used by the cgroup freezer) */
 	ANDROID_KABI_USE(1, unsigned frozen:1);
 
+#ifdef CONFIG_ANDROID_SIMPLE_LMK
+	struct task_struct		*simple_lmk_next;
+#endif
+
 	/*
 	 * New fields for task_struct should be added above here, so that
 	 * they are included in the randomized portion of task_struct.
+
 	 */
+
 	randomized_struct_fields_end
 
 	/* CPU-specific state of this task: */
