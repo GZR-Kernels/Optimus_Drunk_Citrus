@@ -1,0 +1,13 @@
+ {
+  "kernel": {
+    "name": "Optimus Drunk Citrus",
+    "version": "v11.1",
+    "link": "https://github.com/GZR-Kernels/Optimus_Drunk_Citrus/releases/download/v11.1/Optimus_Drunk_Citrus_v11.1.zip",
+    "changelog_url": "https://raw.githubusercontent.com/GZR-Kernels/Optimus_Drunk_Citrus/11.0/Updates/changelog",
+    "date": "2021-08-03",
+    "sha1": "a1fbfb2883dd03d71daeb399816637f1ecb98161"
+  },
+  "support": {
+    "link": "https://forum.xda-developers.com/t/kernel-citrus-lime-lemon-pomelo-optimus-drunk-kernel-v11-0-23-06.4295865/"
+  }
+}
