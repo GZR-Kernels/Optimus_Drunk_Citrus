@@ -5,7 +5,7 @@
 ## Copy this script inside the kernel directory
 KERNEL_DEFCONFIG=vendor/citrus_defconfig
 ANYKERNEL3_DIR=$PWD/AnyKernel3/
-FINAL_KERNEL_ZIP=Optimus_Drunk_Citrus_v11.1.zip
+FINAL_KERNEL_ZIP=Optimus_Drunk_Citrus_v11.2.zip
 export ARCH=arm64
 
 # Speed up build process
