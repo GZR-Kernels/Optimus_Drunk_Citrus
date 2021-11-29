@@ -6,59 +6,52 @@
 KERNEL_DEFCONFIG=vendor/citrus_defconfig
 ANYKERNEL3_DIR=$PWD/AnyKernel3/
 FINAL_KERNEL_ZIP=Optimus_Drunk_Citrus_v11.1.zip
-export PATH="$KERNELDIR/prebuilts/proton-clang/bin:${PATH}"
 export ARCH=arm64
-export SUBARCH=arm64
-export KBUILD_COMPILER_STRING="$($KERNELDIR/prebuilts/proton-clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+
 # Speed up build process
 MAKE="./makeparallel"
 
 BUILD_START=$(date +"%s")
-blue='\033[0;34m'
-cyan='\033[0;36m'
-yellow='\033[0;33m'
-red='\033[0;31m'
+blue='\033[1;34m'
+yellow='\033[1;33m'
 nocol='\033[0m'
 
-# Clean build always lol
-echo "**** Cleaning ****"
+# Always do clean build lol
+echo -e "$yellow**** Cleaning ****$nocol"
 mkdir -p out
 make O=out clean
 
-echo "**** Kernel defconfig is set to $KERNEL_DEFCONFIG ****"
+echo -e "$yellow**** Kernel defconfig is set to $KERNEL_DEFCONFIG ****$nocol"
 echo -e "$blue***********************************************"
 echo "          BUILDING KERNEL          "
 echo -e "***********************************************$nocol"
 make $KERNEL_DEFCONFIG O=out
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
-                      CC=clang \
-                      CROSS_COMPILE=aarch64-linux-gnu- \
-                      CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-                      NM=llvm-nm \
-                      OBJCOPY=llvm-objcopy \
-                      OBJDUMP=llvm-objdump \
-                      STRIP=llvm-strip
+                      CC=$KERNELDIR/prebuilts/clang-r433403b/bin/clang \
+                      CLANG_TRIPLE=aarch64-linux-gnu- \
+                      CROSS_COMPILE=$KERNELDIR/prebuilts/aarch64-linux-android-4.9/bin/aarch64-linux-android- \
+                      CROSS_COMPILE_ARM32=$KERNELDIR/prebuilts/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
-echo "**** Verify Image.gz-dtb ****"
+echo "$yellow**** Verify Image.gz-dtb ****"
 ls $PWD/out/arch/arm64/boot/Image.gz-dtb
 
 # Anykernel 3 time!!
-echo "**** Verifying AnyKernel3 Directory ****"
+echo "$yellow**** Verifying AnyKernel3 Directory ****"
 ls $ANYKERNEL3_DIR
-echo "**** Removing leftovers ****"
+echo "$yellow**** Removing leftovers ****"
 rm -rf $ANYKERNEL3_DIR/Image.gz-dtb
 rm -rf $ANYKERNEL3_DIR/$FINAL_KERNEL_ZIP
 
-echo "**** Copying Image.gz-dtb****"
+echo "$yellow**** Copying Image.gz-dtb****"
 cp $PWD/out/arch/arm64/boot/Image.gz-dtb $ANYKERNEL3_DIR/
 
-echo "**** Time to zip up! ****"
+echo "$yellow**** Time to zip up! ****"
 cd $ANYKERNEL3_DIR/
 zip -r9 $FINAL_KERNEL_ZIP * -x README $FINAL_KERNEL_ZIP
 cp $ANYKERNEL3_DIR/$FINAL_KERNEL_ZIP $KERNELDIR/$FINAL_KERNEL_ZIP
 
-echo "**** Done, here is your sha1 ****"
+echo "$yellow**** Done, here is your sha1 ****"
 cd ..
 rm -rf $ANYKERNEL3_DIR/$FINAL_KERNEL_ZIP
 rm -rf $ANYKERNEL3_DIR/Image.gz-dtb
